@@ -5,3 +5,4 @@ function Cart(params) {
     </>
    ); 
 }
+export default Cart;
