@@ -1,10 +1,10 @@
 function Navbar(){
 return(
-    <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="h-20">
-        <ul className="flex w-screen mt-4  justify-evenly text-lg capitalize">
+    <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="h-10">
+        <ul className="flex w-screen   justify-evenly text-lg capitalize">
             <li>amazon</li>
             <li>delivery</li>
-            <li>
+            <li className="mt-2">
                 <input type="text" />
             </li>
             <li>choose Languae</li>
