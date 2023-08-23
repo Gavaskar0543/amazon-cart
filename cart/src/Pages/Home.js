@@ -1,7 +1,13 @@
+
 function Home(){
+    
+      
+   
+
+  
     return(
         <>
-       <div className="mt-2 w-screen h-screen">
+       <div className="mt-2">
         <h2 className="text-xl">Recomended Category</h2>
         <div className="mt-2 mb-1 flex-col ml-5 border border-2 inline-block" >
          <img src="#" alt="product-id#423$" />

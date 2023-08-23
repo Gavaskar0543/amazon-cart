@@ -1,0 +1,14 @@
+.inputForm{
+  
+    margin-top:0.5%;
+    
+}
+.inputForm input{
+    border:1px solid white;
+}
+.inputForm button{
+    border:1px solid white;
+    color:black;
+  
+    background-color:rgb(254,189,105);
+}
