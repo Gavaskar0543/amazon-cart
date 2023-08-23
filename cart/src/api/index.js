@@ -32,7 +32,7 @@ const customFetch = async (url,{body,...customConfig}) => {
     console.log(error.message);
     return{
         message:'internal server error',
-        success:false;
+        success:false
     }
     
   }
