@@ -1,7 +1,21 @@
+import Styles from '../Styels/Cart.module.css';
 function Cart(params) {
    return(
     <>
-    <h1>Cart page</h1>
+   <div className={Styles.cartOuter}>
+      <div>
+         <div>
+            <div>
+              <input type="checkbox" />
+              
+
+            </div>
+            <div>
+               max 25
+            </div>
+         </div>
+      </div>
+    </div>
     </>
    ); 
 }
