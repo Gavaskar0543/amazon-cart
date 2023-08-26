@@ -1,4 +1,4 @@
-const ROOT_URL = "https://my-json-server.typicode.com/typicode/demo/db";
+const ROOT_URL = "https://fakestoreapi.com";
 export const ApiUrls ={
-    getData: () => `${ROOT_URL}`
+    getProducts: () => `https://fakestoreapi.com/products`
 }

@@ -42,8 +42,8 @@ const customFetch = async (url, { body, ...customConfig }) => {
 
 
 //getdata
-export const getPost = () =>{
-    return customFetch(ApiUrls.getData,{
+export const productFromDB = () =>{
+    return customFetch(ApiUrls.getProducts,{
         method:'GET'
     })
 }
