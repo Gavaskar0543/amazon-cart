@@ -2,18 +2,18 @@ import Styled from 'styled-components';
 export default function ItemCard({item}){
     return(
         <>
-         <div id={item.id} className="mt-2 mb-1  ml-5 border border-2 inline-block" >
-         <ImgDiv>
+         <div id={item.id} className="mt-2 mb-1 ml-5 border border-2 inline-block" >
+         <ImgDiv className='mt-2'>
          <img src={item.image} alt="product-id#423$" width={100}/>
          </ImgDiv>
          <div>
-            <p className='text-2xl'>{item.title}</p>
+            <p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p>
          </div>
          <div>
            <p>{item.description}</p>
          </div>
          <div>
-            <h5>{item.price}</h5>
+            <h5 className='text-1xl'>&#x20B9; {item.price}</h5>
          </div>
          <div>
             <p>Free delivery</p>

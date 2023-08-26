@@ -2,13 +2,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapLocationDot,faCartShopping,faGifts,faUser,faAdd,faSearch} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import Styled from 'styled-components';
 import  Styles  from '../Styels/Navbar.module.css';
 
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
 return(
     <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="h-10">
-        <ul className="flex w-screen   justify-evenly text-lg capitalize cursor-pointer">
+        <ul className="flex  justify-evenly items-center text-lg capitalize cursor-pointer">
             <li>
                 <Link to='/'>
                 <img src={"https://d24v5oonnj2ncn.cloudfront.net/wp-content/uploads/2018/10/16030301/Amazon-Logo-Black.jpg"} alt="poste" width={72} />
