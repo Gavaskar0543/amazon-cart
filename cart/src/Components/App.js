@@ -5,6 +5,7 @@ import Home from "../Pages/Home";
 import Cart from '../Pages/Cart'
 import AddProduct from '../Pages/AddProducts';
 import { productFromDB } from '../api';
+import ShowProduct from '../Pages/ShowProduct';
 class App extends React.Component{
 
   componentDidMount(){
@@ -47,6 +48,7 @@ store.subscribe(()=>{
   <Route path="/" element={<Home products={this.props.store.getState()}/>} />
   <Route path="/addproduct" element={<AddProduct />} />
   <Route path="/cart" element={<Cart />} />
+  <Route path="/product/:id" element={<ShowProduct/>} />
   </Routes>
   </>
  

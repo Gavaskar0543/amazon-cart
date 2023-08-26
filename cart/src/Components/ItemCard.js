@@ -7,11 +7,9 @@ export default function ItemCard({item}){
          <img src={item.image} alt="product-id#423$" width={100}/>
          </ImgDiv>
          <div>
-            <p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p>
+          <a href={`/product/${item.id}`}><p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p></a>
          </div>
-         <div>
-           <p>{item.description}</p>
-         </div>
+        
          <div>
             <h5 className='text-1xl'>&#x20B9; {item.price}</h5>
          </div>
