@@ -6,10 +6,11 @@ import Cart from '../Pages/Cart'
 import AddProduct from '../Pages/AddProducts';
 import { productFromDB } from '../api';
 import ShowProduct from '../Pages/ShowProduct';
+import { ADD_PRODUCTS, addProducts } from '../Action';
 class App extends React.Component{
 
   componentDidMount(){
-    let newProduct = [];
+    
     const {store} = this.props;
    
  //fetching api
@@ -18,10 +19,9 @@ class App extends React.Component{
  .then(json => {
    // Now the newProduct array contains the fetched data
     //dispatch
-store.dispatch({
-  type:'ADD_PRODUCT',
-  product: json
-})
+    const arr = [...json];
+   
+store.dispatch(addProducts(arr))
  })
  .catch(error => {
    console.error('Error fetching data:', error);
@@ -29,26 +29,27 @@ store.dispatch({
  //subcribe
 store.subscribe(()=>{
   console.log("updated!");
-  
+  console.log(this.props.store.getState());
   this.forceUpdate();
 
 })
 
 
+
  }
 
   render(){
-    
+ 
     
   return(
   
   <>
   <Navbar/>
   <Routes>
-  <Route path="/" element={<Home products={this.props.store.getState()}/>} />
+  <Route path="/" element={<Home store={this.props.store}/>} />
   <Route path="/addproduct" element={<AddProduct />} />
-  <Route path="/cart" element={<Cart />} />
-  <Route path="/product/:id" element={<ShowProduct/>} />
+  <Route path="/cart" element={<Cart store={this.props.store} />} />
+  <Route path="/product/:id" element={<ShowProduct dispatch={this.props.store.dispatch}/>} />
   </Routes>
   </>
  

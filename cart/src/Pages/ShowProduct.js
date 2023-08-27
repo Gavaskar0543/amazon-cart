@@ -3,21 +3,32 @@ import {useParams} from 'react-router-dom';
 import Loading from '../Components/Loading';
 import Styled from 'styled-components';
 import '../Styels/Loading.css';
-export default function ShowProduct(){
+import { add2Cart } from '../Action';
+export default function ShowProduct({dispatch}){
 
     const [product,setProduct]=useState('');
     const [loading, setLoading] = useState(true);
-
+    const [addToCart,setAddToCart] = useState(false);
     const {id} = useParams();
     useEffect(()=>{
         fetch(`https://fakestoreapi.com/products/${id}`)
             .then(res=>res.json())
             .then(json=>{
                 setProduct(json);
-                setLoading(false);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 3000);
             })
     },[]);
+const handleCart=(item)=>{
 
+  dispatch(add2Cart(item));
+  setAddToCart(true);
+
+}
+const handleRemoveCart = (item) =>{
+  setAddToCart(false);
+}
    
   if(loading){
     return <Loading/>
@@ -25,11 +36,11 @@ export default function ShowProduct(){
     return(
         <>
 
-            <outerDiv className='mt-5'>
+            <div className='mt-5'>
                 <div>
                     <h1 className='text-5xl capitalize'>{product.category}</h1>
                 </div>
-                <innerDiv className='m-10 border border-2 flex justify-between'>
+                <div className='m-10 border border-2 flex justify-between'>
                    <div>
                     <img src={product.image} alt='product-img' width={320} />
                    </div>
@@ -45,17 +56,19 @@ export default function ShowProduct(){
                            <h1 className='text-3xl'>&#x20B9; {product.price}</h1>
                         </div>
                         <div className='w-full flex justify-center'>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        {addToCart ? <button onClick={()=>handleRemoveCart(product)} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+  Remove from Cart
+</button>: <button onClick={()=>handleCart(product)} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
   Add Cart
-</button>
+</button>}
 
                         </div>
                      </div>
                    </div>
                    
-                </innerDiv>
+                </div>
                
-            </outerDiv>
+            </div>
         </>
     )
 }

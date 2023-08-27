@@ -1,21 +1,13 @@
 import Styles from '../Styels/Cart.module.css';
-function Cart(params) {
+function Cart({store}) {
+   const{cartList} = store.getState();
+   console.log(cartList)
    return(
     <>
-   <div className={Styles.cartOuter}>
-      <div>
-         <div>
-            <div>
-              <input type="checkbox" />
-              
-
-            </div>
-            <div>
-               max 25
-            </div>
-         </div>
-      </div>
-    </div>
+    { cartList.map(item => 
+      <h1>{item.title}</h1>
+     
+    )}
     </>
    ); 
 }
