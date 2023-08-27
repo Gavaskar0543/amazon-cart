@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import Styled from 'styled-components';
 import ItemCart from '../Components/ItemCard';
 function Home({products}){
-  
+
     return(
         <>
        <HomeLayout className="mt-2">
