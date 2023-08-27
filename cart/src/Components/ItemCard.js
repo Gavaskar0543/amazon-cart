@@ -1,4 +1,5 @@
 import Styled from 'styled-components';
+import {Link} from 'react-router-dom';
 export default function ItemCard({item}){
     return(
         <>
@@ -7,7 +8,7 @@ export default function ItemCard({item}){
          <img src={item.image} alt="product-id#423$" width={100}/>
          </ImgDiv>
          <div>
-          <a href={`/product/${item.id}`}><p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p></a>
+          <Link to={`/product/${item.id}`}><p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p></Link>
          </div>
         
          <div>
