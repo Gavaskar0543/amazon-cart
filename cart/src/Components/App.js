@@ -46,12 +46,12 @@ store.subscribe(()=>{
   return(
   
   <>
-  <Navbar/>
+  <Navbar store={this.props.store}/>
   <Routes>
   <Route path="/" element={<Home store={this.props.store}/>} />
   <Route path="/addproduct" element={<AddProduct store={this.props.store}  />} />
   <Route path="/cart" element={<Cart store={this.props.store} />} />
-  <Route path="/product/:id" element={<ShowProduct dispatch={this.props.store.dispatch}/>} />
+  <Route path="/product/:id" element={<ShowProduct store={this.props.store} dispatch={this.props.store.dispatch}/>} />
   </Routes>
   <Footer/>
   </>

@@ -2,11 +2,17 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapLocationDot,faCartShopping,faGifts,faUser,faAdd,faSearch} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { showCartCount } from '../Action';
 import Styled from 'styled-components';
 import  Styles  from '../Styels/Navbar.module.css';
+import { useEffect } from 'react';
 
 library.add(faMapLocationDot,faCartShopping);
-function Navbar(){
+function Navbar({store}){
+    let {cartCount,cartList} = store.getState();
+    useEffect(()=>{
+        store.dispatch(showCartCount(cartList.length));
+      },[cartList.length])
 return(
     <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 h-10">
         <ul className="flex  justify-evenly items-center text-lg capitalize cursor-pointer">
@@ -27,7 +33,8 @@ return(
             <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li>
             <Link to='/cart'>
             <li>
-                <FontAwesomeIcon icon={faCartShopping} />Cart</li>
+                <FontAwesomeIcon icon={faCartShopping} />Cart <span></span>{cartCount}</li>
+                
                 </Link>
         </ul>
     </div>

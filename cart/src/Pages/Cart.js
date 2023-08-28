@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 function Cart({store}) {
- const {cartList} = store.getState();
+  let {cartList,cartCount} = store.getState();
   const [total,setToatal] = useState(0);
   const [cart,setCart] = useState(0);
   
@@ -13,11 +13,16 @@ function Cart({store}) {
     count = count+product.qty * product.price;
   });
   setToatal(count);
- },[cart])
+  //handle cart count
+ 
+ },[cart,cartCount])
   const increaseQuantity = (item) =>{
+   
     let id = cartList.indexOf(item);
     cartList[id].qty = cartList[id].qty + 1;
     setCart(cart+1);
+   
+   
   }
      
   const decreaseQuantity =  (item) =>{
@@ -32,6 +37,7 @@ function Cart({store}) {
   return;
  }
  setCart(cart-1);
+ 
      
   }
   
@@ -40,6 +46,7 @@ function Cart({store}) {
     <OuterDiv className='h-full'>
      {cartList.map(item => 
       <LeftDiv>
+        
         <div>
           <img src={item.image} width={150}/>
         </div>
@@ -51,6 +58,7 @@ function Cart({store}) {
           <h1 className='text-center'>{item.qty}</h1>
           <button onClick={() =>{increaseQuantity(item)}} className='py-2 px-2  text-1xl rounded '>+</button>
         </ButtonDiv>
+        
       </LeftDiv>)}
      <RightDiv>
       <div>

@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import Loading from '../Components/Loading';
+import { showCartCount } from '../Action';
+import { removeFromCart } from '../Action';
 import Styled from 'styled-components';
 import '../Styels/Loading.css';
 import { add2Cart } from '../Action';
-export default function ShowProduct({dispatch}){
+export default function ShowProduct({store}){
+
+  let {cartList,cartCount} = store.getState();
 
     const [product,setProduct]=useState('');
     const [loading, setLoading] = useState(true);
     const [addToCart,setAddToCart] = useState(false);
+    const [cart,setCart] = useState(0);
     const {id} = useParams();
     useEffect(()=>{
         fetch(`https://fakestoreapi.com/products/${id}`)
@@ -18,16 +23,21 @@ export default function ShowProduct({dispatch}){
                 setTimeout(() => {
                   setLoading(false);
                 }, 3000);
-            })
+            });
+  
     },[]);
+  
 const handleCart=(item)=>{
  item.qty=0
-  dispatch(add2Cart(item));
+ store.dispatch(add2Cart(item));
   setAddToCart(true);
+
 
 }
 const handleRemoveCart = (item) =>{
   setAddToCart(false);
+ 
+  store.dispatch(removeFromCart(item));
 }
    
   if(loading){
