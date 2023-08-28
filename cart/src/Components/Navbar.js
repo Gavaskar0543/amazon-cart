@@ -32,12 +32,20 @@ return(
             <li><FontAwesomeIcon icon={faUser} />user</li>
             <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li>
             <Link to='/cart'>
-            <li>
-                <FontAwesomeIcon icon={faCartShopping} />Cart <span></span>{cartCount}</li>
+            <cartIcon>
+                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'>{cartCount}</notify></cartIcon>
                 
                 </Link>
         </ul>
     </div>
 );
 }
+
+const cartIcon = Styled.li`
+position:relative;
+`;
+const notify = Styled.div`
+position:absolute;
+
+`
 export default Navbar;
