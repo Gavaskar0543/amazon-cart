@@ -2,7 +2,8 @@ import React,{useState} from 'react';
 import {Route,Routes, json} from 'react-router-dom';
 import Navbar from "./Navbar";
 import Home from "../Pages/Home";
-import Cart from '../Pages/Cart'
+import Cart from '../Pages/Cart';
+import Footer from '../Components/Footer';
 import AddProduct from '../Pages/AddProducts';
 import { productFromDB } from '../api';
 import ShowProduct from '../Pages/ShowProduct';
@@ -48,10 +49,11 @@ store.subscribe(()=>{
   <Navbar/>
   <Routes>
   <Route path="/" element={<Home store={this.props.store}/>} />
-  <Route path="/addproduct" element={<AddProduct />} />
+  <Route path="/addproduct" element={<AddProduct store={this.props.store}  />} />
   <Route path="/cart" element={<Cart store={this.props.store} />} />
   <Route path="/product/:id" element={<ShowProduct dispatch={this.props.store.dispatch}/>} />
   </Routes>
+  <Footer/>
   </>
  
     );

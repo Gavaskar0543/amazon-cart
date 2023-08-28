@@ -8,7 +8,7 @@ import  Styles  from '../Styels/Navbar.module.css';
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
 return(
-    <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="h-10">
+    <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 h-10">
         <ul className="flex  justify-evenly items-center text-lg capitalize cursor-pointer">
             <li>
                 <Link to='/'>

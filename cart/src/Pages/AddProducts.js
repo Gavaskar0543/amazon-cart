@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { addnewPoduct } from "../Action";
 
-function AddProduct(){
+function AddProduct({store}){
   const [title,setTitle] = useState('');
   const [price,setPrice] = useState(0);
   const [url,setUrl] = useState('');
-
+  const [id,setId] = useState(0);
+  
+  const {list} = store.getState();
+  let length = list.length-1;
   const handlePrice = (e)=>{
     setPrice(e.target.value);
   }
@@ -15,7 +19,19 @@ function AddProduct(){
     setUrl(e.target.value);
   }
   const handleSubmit = () => {
-    console.log(title,price,url);
+    setId(id+1);
+
+    store.dispatch(addnewPoduct({
+      id:id,
+      title:title,
+      price:price,
+      image:url
+    }))
+
+    setUrl('');
+    setPrice(0);
+    setTitle('');
+   
   }
     return(
    
@@ -30,6 +46,7 @@ function AddProduct(){
       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       id="title"
       type="text"
+      value={title}
       placeholder="Enter Product Title"
       onChange={handleTitle}
     />
@@ -42,6 +59,7 @@ function AddProduct(){
       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       id="Price"
       type="price"
+      value={price}
       placeholder="Enter Price"
       onChange={handlePrice}
     />
@@ -53,7 +71,8 @@ function AddProduct(){
     <input
       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       id="Quantity"
-      type="price"
+      type="text"
+      value={url}
       placeholder="Enter url!"
       onChange={handleUrl}
     />
