@@ -20,14 +20,9 @@ class App extends React.Component{
    // Now the newProduct array contains the fetched data
     //dispatch
     const arr = [...json];
-    const newArr = arr.map(item =>{
-      return{
-        ...item,
-        qty:0
-      }
-    })
-   console.log("newarr",newArr);
-store.dispatch(addProducts(newArr))
+   
+ 
+store.dispatch(addProducts(arr))
  })
  .catch(error => {
    console.error('Error fetching data:', error);

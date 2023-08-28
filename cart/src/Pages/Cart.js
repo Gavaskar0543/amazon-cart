@@ -1,29 +1,40 @@
 import { useEffect, useState } from 'react';
 import Styled from 'styled-components';
 function Cart({store}) {
-  const [quantity,setQuantity] = useState(1);
+ const {cartList} = store.getState();
   const [total,setToatal] = useState(0);
+  const [cart,setCart] = useState(0);
   
-useEffect(() =>{
-  cartList.map(item => {
-    let price = item.price*quantity;
-    setToatal(price);
-  })
-},[quantity])
-  const increaseQuantity = () =>{
-    let newQuantity = quantity+1;
-      setQuantity(newQuantity);
-  }
-  const decreaseQuantity = () =>{
-    if(quantity === 0){
-      return;
-    }
-    let newQuantity = quantity-1;
-    setQuantity(newQuantity);
+ useEffect(()=>{
 
+  let count = 0;
+ 
+  cartList.map((product) => {
+    count = count+product.qty * product.price;
+  });
+  setToatal(count);
+ },[cart])
+  const increaseQuantity = (item) =>{
+    let id = cartList.indexOf(item);
+    cartList[id].qty = cartList[id].qty + 1;
+    setCart(cart+1);
   }
-   const{cartList} = store.getState();
-   console.log(cartList)
+     
+  const decreaseQuantity =  (item) =>{
+     let id = cartList.indexOf(item);
+     if(cartList[id].qty === 0){
+      return;
+     }
+    
+  // Update the quantity using the correct syntax
+  cartList[id].qty = cartList[id].qty - 1;
+ if(cart === 0){
+  return;
+ }
+ setCart(cart-1);
+     
+  }
+  
    return(
     <>
     <OuterDiv className='h-full'>
@@ -36,9 +47,9 @@ useEffect(() =>{
           <h1 className='text-2xl'>{item.title}</h1>
         </div>
         <ButtonDiv className='text-1xl'>
-          <button onClick={decreaseQuantity} className='py-2 px-2  text-1xl rounded '>-</button>
-          <input type='text'  value={quantity}   />
-          <button onClick={increaseQuantity } className='py-2 px-2  text-1xl rounded '>+</button>
+          <button onClick={() => {decreaseQuantity(item)}} className='py-2 px-2  text-1xl rounded '>-</button>
+          <h1 className='text-center'>{item.qty}</h1>
+          <button onClick={() =>{increaseQuantity(item)}} className='py-2 px-2  text-1xl rounded '>+</button>
         </ButtonDiv>
       </LeftDiv>)}
      <RightDiv>
@@ -48,7 +59,7 @@ useEffect(() =>{
         </div>
         <div className='flex justify-between'>
         <h1>Item Quantity:</h1>
-        <h1>{quantity}</h1>
+        <h1>{cart}</h1>
         </div>
         <div className='flex justify-between'>
          <h1>GST:</h1>
@@ -70,6 +81,7 @@ useEffect(() =>{
     </>
    ); 
 }
+
 const OuterDiv = Styled.div`
 width:90%;
 margin:5%;
@@ -103,7 +115,8 @@ width:30%;
     width:20%;
      background:grey;
    }
+  
 
-`
+`;
 
 export default Cart;

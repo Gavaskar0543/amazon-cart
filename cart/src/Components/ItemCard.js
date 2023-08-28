@@ -15,7 +15,7 @@ export default function ItemCard({item}){
             <h5 className='text-1xl'>&#x20B9; {item.price}</h5>
          </div>
          <div>
-            <p>Free delivery</p>
+            <p>Free delivery:{item.qty}</p>
          </div>
         </div>
         

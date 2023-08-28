@@ -21,7 +21,7 @@ export default function ShowProduct({dispatch}){
             })
     },[]);
 const handleCart=(item)=>{
-
+ item.qty=0
   dispatch(add2Cart(item));
   setAddToCart(true);
 
