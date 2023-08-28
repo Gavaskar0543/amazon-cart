@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 export default function ItemCard({item}){
     return(
         <>
-         <div id={item.id} className="mt-2 mb-1 ml-5 border border-2 inline-block" >
+       
+         <OuterDiv id={item.id} className="mt-2 mb-1 ml-5 text-center border border-2 inline-block" >
          <ImgDiv className='mt-2'>
          <img src={item.image} alt="product-id#423$" width={100}/>
          </ImgDiv>
@@ -15,14 +16,29 @@ export default function ItemCard({item}){
             <h5 className='text-1xl'>&#x20B9; {item.price}</h5>
          </div>
          <div>
-            <p>Free delivery:{item.qty}</p>
+            <p className='text-1sm'>Free delivery</p>
          </div>
-        </div>
+        </OuterDiv>
         
         </>
     );
 }
 
+
+
+
+
+const OuterDiv = Styled.div`
+
+&:hover{
+    background: rgba( 255, 255, 255, 0.3 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+   
+}
+`;
 const ImgDiv = Styled.div`
  width:100%;
  display:flex;
