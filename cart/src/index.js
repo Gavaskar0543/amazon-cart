@@ -4,6 +4,7 @@ import {createStore} from 'redux';
 import ReactDOM from 'react-dom/client';
 import products from './Reducers';
 import App from './Components/App';
+import './index.css'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = createStore(products);

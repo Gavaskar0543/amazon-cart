@@ -5,22 +5,29 @@ import { Link } from 'react-router-dom';
 import { showCartCount } from '../Action';
 import Styled from 'styled-components';
 import  Styles  from '../Styels/Navbar.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 library.add(faMapLocationDot,faCartShopping);
 function Navbar({store}){
     let {cartCount,cartList} = store.getState();
+    const [showMenu,setShowMenu] = useState(false);
     useEffect(()=>{
         store.dispatch(showCartCount(cartList.length));
-      },[cartList.length])
+      },[cartList.length,showMenu]);
+
+      function openMenuList() {
+        setShowMenu(prevShowMenu => !prevShowMenu);
+      }
+      
 return(
-    <div style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 h-10">
-        <ul className="flex  justify-evenly items-center text-lg capitalize cursor-pointer">
-            <li>
-                <Link to='/'>
-                <img src={"https://d24v5oonnj2ncn.cloudfront.net/wp-content/uploads/2018/10/16030301/Amazon-Logo-Black.jpg"} alt="poste" width={72} />
-                </Link>
-            </li>
+    <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className=" capitalize ">
+        <div className='logo'>
+        <Link to='/'>
+          Amazon.co
+                </Link> 
+        </div>
+        <ul className={showMenu ? 'showMenu' : ''}>
+        
             <li><FontAwesomeIcon  icon={faMapLocationDot}/>delivery</li>
             <li className={Styles.inputForm}>
                 <input type="text"  placeholder='Search Here!'/>
@@ -32,20 +39,100 @@ return(
             <li><FontAwesomeIcon icon={faUser} />user</li>
             <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li>
             <Link to='/cart'>
-            <cartIcon>
-                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'>{cartCount}</notify></cartIcon>
+            <li>
+                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'>{cartCount}</notify></li>
                 
                 </Link>
         </ul>
-    </div>
+        <div onClick={openMenuList} className='menu'>
+          <div className='menu-line'></div>
+          <div className='menu-line'></div>
+          <div className='menu-line'></div>
+        </div>
+    </OuterDiv>
 );
 }
 
-const cartIcon = Styled.li`
-position:relative;
-`;
-const notify = Styled.div`
-position:absolute;
 
-`
+
+
+const OuterDiv = Styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .logo {
+    font-size:36px;
+    font-weight:bolder;
+    transition: color 0.3s ease-in-out;
+
+
+    &:hover {
+      color: rgb(254, 189, 105);
+    }
+  }
+
+  ul li {
+    display: inline-block;
+    margin: 0 25px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: rgb(254, 189, 105);
+    }
+  }
+
+  .menu-line {
+    height: 3px;
+    width: 20px;
+    margin-bottom: 3px;
+    background-color: rgb(254, 189, 105);
+  }
+
+  .menu {
+    cursor: pointer;
+    display: none;
+  }
+
+  @media all and (max-width: 940px) {
+    /* Corrected 'OuterDiv' to 'OuterDiv' (case-sensitive) */
+    width: 100%;
+    flex-direction: column;
+
+    ul li {
+      display: block;
+      padding: 10px 0;
+      margin: 0; /* Corrected 'marign' to 'margin' */
+    }
+
+    ul {
+      text-align: center;
+      padding:0;
+      display:none;
+      
+    }
+
+    .logo {
+      align-self: flex-start;
+      margin: 10px 0 0 30px; /* Corrected 'marign' to 'margin' */
+    }
+
+    .menu{
+      display:block;
+      position:absolute;
+      right:20px;
+      top:25px;
+    }
+    .showMenu{
+      display:block;
+    }
+  }
+  @media all and (min-width:940)
+`;
+
+
+
+
 export default Navbar;
