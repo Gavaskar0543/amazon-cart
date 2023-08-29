@@ -28,6 +28,13 @@ const StyledDiv = Styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   /* Other styles for the container */
+
+  @media all and (max-width: 639px) {
+    /* Your CSS rules for mobile phones */
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
 `;
 
 const UserLayout = Styled.div`

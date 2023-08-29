@@ -20,7 +20,7 @@ function Navbar({store}){
       }
       
 return(
-    <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className=" capitalize ">
+    <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 capitalize ">
         <div className='logo'>
         <Link to='/'>
           Amazon.co

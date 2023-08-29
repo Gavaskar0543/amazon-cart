@@ -8,8 +8,8 @@ export default function ItemCard({item}){
          <ImgDiv className='mt-2'>
          <img src={item.image} alt="product-id#423$" width={100}/>
          </ImgDiv>
-         <div>
-          <Link to={`/product/${item.id}`}><p style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p></Link>
+         <div >
+          <Link  className='itemName' to={`/product/${item.id}`}><p  style={{color:"rgb(157,165,164)"}} className='text-2xl'>{item.title}</p></Link>
          </div>
         
          <div>
@@ -30,8 +30,11 @@ export default function ItemCard({item}){
 
 const OuterDiv = Styled.div`
 
+
+
 &:hover{
     background: rgba( 255, 255, 255, 0.3 );
+    color: rgb(254, 189, 105) !important;
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
@@ -39,6 +42,10 @@ const OuterDiv = Styled.div`
    
 }
 `;
+
+
+
+
 const ImgDiv = Styled.div`
  width:100%;
  display:flex;
