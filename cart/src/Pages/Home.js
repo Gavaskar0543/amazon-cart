@@ -1,22 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchApiData } from '../Redux/Reducer/apiSlice';
 
 import Styled from 'styled-components';
 function Home(){
-  
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.api);
 
-console.log(apiData);
+  let electronics = [];
+  let jewelery = [];
+  let mens = [];
+  let womens = [];
+ if(apiData.data !== null){
+  apiData.data.forEach(element => {
+   
+    if(element.category === 'electronics'){
+      electronics.push(element);
+    }
+    else if(element.category === 'jewelery'){
+      jewelery.push(element);
+    }
+    else if(element.category === `men's clothing`){
+      mens.push(element);
+    }
+    else{
+      womens.push(element);
+    }
+    
+  });
+ }
 
+ console.log(electronics)
+ console.log(jewelery)
+ console.log(mens);
+ console.log(womens)
+ 
   useEffect(() => {
     dispatch(fetchApiData());
   }, [dispatch]);
 
   if (apiData.status === 'loading') {
+  
     return <div>Loading...</div>;
   }
+  
 
   if (apiData.status === 'failed') {
     return <div>Error: {apiData.error}</div>;
@@ -33,6 +60,10 @@ console.log(apiData);
        <section id='mens-clothing' className='section mb75'>
        <div className="section-heading">
         <span>Mens Clothing</span>
+
+        <div>
+         
+        </div>
         </div>
       </section>  
        <section id="female-clothing" className='section mb75'>
