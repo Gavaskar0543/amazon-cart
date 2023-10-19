@@ -18,7 +18,8 @@ export default function Topnav(){
         <>
         <div style={{widht:"100vw",background:`${color}`,transition:"background 2s ease-in-out",backgroundAttachment:"fixed"}}>
 
-            <h5 className="text-center text-sm text-white">Every order get 25% offer</h5>
+            <marquee direction="right"
+             behavior="alternate" className=" text-sm text-green-900">Every order get 25% offer</marquee>
 
         </div>
         </>

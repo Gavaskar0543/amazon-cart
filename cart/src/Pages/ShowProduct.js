@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
-import Loading from '../Components/Loading';
-import { showCartCount } from '../Action';
-import { removeFromCart } from '../Action';
+
 import Styled from 'styled-components';
 import '../Styels/Loading.css';
-import { add2Cart } from '../Action';
+
 export default function ShowProduct({store}){
 
   let {cartList,cartCount} = store.getState();
@@ -28,20 +26,18 @@ export default function ShowProduct({store}){
     },[]);
   
 const handleCart=(item)=>{
- item.qty=0
- store.dispatch(add2Cart(item));
-  setAddToCart(true);
+
 
 
 }
 const handleRemoveCart = (item) =>{
   setAddToCart(false);
  
-  store.dispatch(removeFromCart(item));
+  
 }
    
   if(loading){
-    return <Loading/>
+    return <loading/>
   }
     return(
         <>
