@@ -6,8 +6,11 @@ function Home({store}){
    const{list} = store.getState();
    const {userAdded} = store.getState();
   
-    return(
+   return(
         <>
+        <BackGround>
+         
+        </BackGround>
        <HomeLayout className="mt-2">
         <h2 className="text-3xl ml-4">Recomended category</h2>
         <StyledDiv>
@@ -21,6 +24,16 @@ function Home({store}){
     );
 }
 
+
+const BackGround = Styled.div`
+width:100vw;
+height:50vh;
+background-image:url('https://aryas.fashion/resource/public/website_files/img/bhty-outwsedy-oi.jpg');
+background-repeat:no-repeat;
+background-position:center;
+background-size:contain;
+background-attachment:fixed;
+`
 const HomeLayout = Styled.div`
 width:95%;
 `

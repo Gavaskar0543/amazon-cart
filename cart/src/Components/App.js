@@ -4,10 +4,11 @@ import Navbar from "./Navbar";
 import Home from "../Pages/Home";
 import Cart from '../Pages/Cart';
 import Footer from '../Components/Footer';
-import AddProduct from '../Pages/AddProducts';
 import { productFromDB } from '../api';
 import ShowProduct from '../Pages/ShowProduct';
 import { ADD_PRODUCTS, addProducts } from '../Action';
+import ReturnOrderPage from '../Pages/ReturnOrderPage';
+import Topnav from './TopNav';
 class App extends React.Component{
 
   componentDidMount(){
@@ -46,11 +47,12 @@ store.subscribe(()=>{
   return(
   
   <>
+  <Topnav/>
   <Navbar store={this.props.store}/>
   <Routes>
   <Route path="/" element={<Home store={this.props.store}/>} />
-  <Route path="/addproduct" element={<AddProduct store={this.props.store}  />} />
   <Route path="/cart" element={<Cart store={this.props.store} />} />
+  <Route path="/return" element={<ReturnOrderPage/>} />
   <Route path="/product/:id" element={<ShowProduct store={this.props.store} dispatch={this.props.store.dispatch}/>} />
   </Routes>
   <Footer/>
