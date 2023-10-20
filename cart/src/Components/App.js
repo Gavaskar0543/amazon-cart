@@ -6,6 +6,8 @@ import Cart from '../Pages/Cart';
 import Footer from '../Components/Footer';
 import ShowProduct from '../Pages/ShowProduct';
 import ReturnOrderPage from '../Pages/ReturnOrderPage';
+import SignupPage from './Auth/SignupPage';
+import LoginPage from './Auth/LoginPage';
 import Topnav from './TopNav';
 class App extends React.Component{
 
@@ -21,6 +23,8 @@ class App extends React.Component{
   <Navbar store={this.props.store}/>
   <Routes>
   <Route path="/" element={<Home />} />
+  <Route path='/signup' element={<SignupPage/>} />
+  <Route path='/login' element={<LoginPage/>} />
   <Route path="/cart" element={<Cart />}/>
   <Route path="/return" element={<ReturnOrderPage/>} />
   <Route path="/product/:id" element={<ShowProduct />} />

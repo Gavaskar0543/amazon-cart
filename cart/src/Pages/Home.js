@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchApiData } from '../Redux/Reducer/apiSlice';
-
+import Ad from '../Components/Ad';
 import Styled from 'styled-components';
 function Home(){
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.api);
+
+
+
+
 
   let electronics = [];
   let jewelery = [];
@@ -30,10 +34,6 @@ function Home(){
   });
  }
 
- console.log(electronics)
- console.log(jewelery)
- console.log(mens);
- console.log(womens)
  
   useEffect(() => {
     dispatch(fetchApiData());
@@ -53,7 +53,7 @@ function Home(){
    return(
         <>
         <BackGround>
-         
+       
         </BackGround>
        
        <MainDiv>
@@ -62,23 +62,47 @@ function Home(){
         <span>Mens Clothing</span>
 
         <div>
-         
+         {mens.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
         </div>
         </div>
       </section>  
+
+     
+
+     <Ad/>
        <section id="female-clothing" className='section mb75'>
        <div className="section-heading">
         <span>Girls Clothing</span>
+        <div>
+         {womens.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
         </div>
+       
        </section>
        <section id='Electronic' className='section mb75'>
        <div className="section-heading">
         <span>Electronics</span>
+        <div>
+         {electronics.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
         </div>
        </section>
+
        <section id="jewellery" className='section mb75'>
        <div className="section-heading">
-        <span>jewellery</span>
+        <span>jewelery</span>
+
+        <div>
+         {jewelery.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
         </div>
        </section>
        </MainDiv>
@@ -97,20 +121,15 @@ background-size:contain;
 background-color:#fe862c;
 background-attachment:fixed;
 overflow:hidden;
+
+
+
 `
 const MainDiv = Styled.div`
 width:100%;
 
 
- section{
-  width:100%;
-  height:20vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex-wrap:wrap;
 
- }
  section{
   width:100%;
   display: flex;
@@ -143,5 +162,7 @@ section:nth-child(2n+1){
 .mb75{
   margin-bottom:75px;
 }
+
+
 `
 export default  Home;

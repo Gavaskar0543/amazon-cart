@@ -5,6 +5,9 @@ import App from './Components/App';
 import './index.css'
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+import app from './Config/firebase';
+
+console.log('Firebase initialized:', app);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log(store)
 root.render(
