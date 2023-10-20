@@ -1,18 +1,21 @@
 import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {createStore} from 'redux';
 import ReactDOM from 'react-dom/client';
-import products from './Reducers';
 import App from './Components/App';
 import './index.css'
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+import app from './Config/firebase';
+
+console.log('Firebase initialized:', app);
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-const store = createStore(products);
-
+console.log(store)
 root.render(
   <React.StrictMode>
+    <Provider store={store} >
     <Router>
-    <App store={store} />
+    <App  />
     </Router>
+    </Provider>
   </React.StrictMode>
 );

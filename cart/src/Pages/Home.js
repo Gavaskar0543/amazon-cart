@@ -1,43 +1,170 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchApiData } from '../Redux/Reducer/apiSlice';
+import Ad from '../Components/Ad';
 import Styled from 'styled-components';
-import ItemCart from '../Components/ItemCard';
-import UserAdd from '../Components/UserAdd';
-function Home({store}){
-   const{list} = store.getState();
-   const {userAdded} = store.getState();
+import Loading from '../Components/Loading';
+import Products from '../Components/Products'
+function Home(){
+  const dispatch = useDispatch();
+  const apiData = useSelector((state) => state.api);
+
+
+
+
+
+  let electronics = [];
+  let jewelery = [];
+  let mens = [];
+  let womens = [];
+ if(apiData.data !== null){
+  apiData.data.forEach(element => {
+   
+    if(element.category === 'electronics'){
+      electronics.push(element);
+    }
+    else if(element.category === 'jewelery'){
+      jewelery.push(element);
+    }
+    else if(element.category === `men's clothing`){
+      mens.push(element);
+    }
+    else{
+      womens.push(element);
+    }
+    
+  });
+ }
+
+ 
+  useEffect(() => {
+    dispatch(fetchApiData());
+  }, [dispatch]);
+
+  if (apiData.status === 'loading') {
   
-    return(
-        <>
-       <HomeLayout className="mt-2">
-        <h2 className="text-3xl ml-4">Recomended category</h2>
-        <StyledDiv>
-       {list.map((item,index) => <ItemCart item={item} key={index}/>)}
-       </StyledDiv>
-       </HomeLayout>
-       <UserLayout>
-        <UserAdd userAdded={userAdded}/>
-       </UserLayout>
-        </>
-    );
-}
-
-const HomeLayout = Styled.div`
-width:95%;
-`
-const StyledDiv = Styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* Other styles for the container */
-
-  @media all and (max-width: 639px) {
-    /* Your CSS rules for mobile phones */
-    display: grid;
-    grid-template-columns: 1fr;
+    return <Loading/>;
   }
   
-`;
 
-const UserLayout = Styled.div`
-width:95%;
-`;
+  if (apiData.status === 'failed') {
+    return <div>Error: {apiData.error}</div>;
+  }
+
+
+   return(
+        <>
+        <BackGround>
+       
+        </BackGround>
+       
+       <MainDiv>
+       <section id='mens-clothing' className='section mb75'>
+       <div className="section-heading">
+        <span>Mens Clothing</span>
+
+        <div>
+         {mens.map((data) => {
+         return <Products item={data}/>
+})}
+        </div>
+        </div>
+      </section>  
+
+     
+
+     <Ad/>
+       <section id="female-clothing" className='section mb75'>
+       <div className="section-heading">
+        <span>Girls Clothing</span>
+        <div>
+         {womens.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
+        </div>
+       
+       </section>
+       <section id='Electronic' className='section mb75'>
+       <div className="section-heading">
+        <span>Electronics</span>
+        <div>
+         {electronics.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
+        </div>
+       </section>
+
+       <section id="jewellery" className='section mb75'>
+       <div className="section-heading">
+        <span>jewelery</span>
+
+        <div>
+         {jewelery.map((data) => (
+          <h1>{data.title}</h1>
+         ))}
+         </div>
+        </div>
+       </section>
+       </MainDiv>
+        </>
+    );
+
+   };
+
+const BackGround = Styled.div`
+width:100%;
+height:50vh;
+background-image:url('https://aryas.fashion/resource/public/website_files/img/bhty-outwsedy-oi.jpg');
+background-repeat:no-repeat;
+background-position:center;
+background-size:contain;
+background-color:#fe862c;
+background-attachment:fixed;
+overflow:hidden;
+
+
+
+`
+const MainDiv = Styled.div`
+width:100%;
+
+
+
+ section{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+section:nth-child(2n){
+  background-color: #9e9b9b29;
+}
+section:nth-child(2n+1){
+  background-color: white;
+}
+.section-heading{
+  width:auto;
+  padding:2px 10px 10px;
+ 
+  font-weight:auto;
+}
+
+.section-heading span{
+  font-size: 40px;
+  color:#033b56;
+  display: inline-block;
+  padding-top:10px;
+  margin-right:0.5rem;
+  text-transform: uppercase;
+}
+.mb75{
+  margin-bottom:75px;
+}
+
+
+`
 export default  Home;

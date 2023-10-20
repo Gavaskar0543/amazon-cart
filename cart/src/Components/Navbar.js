@@ -2,49 +2,37 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapLocationDot,faCartShopping,faGifts,faUser,faAdd,faSearch} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { showCartCount } from '../Action';
 import Styled from 'styled-components';
 import  Styles  from '../Styels/Navbar.module.css';
 import { useEffect, useState } from 'react';
 
 library.add(faMapLocationDot,faCartShopping);
-function Navbar({store}){
-    let {cartCount,cartList} = store.getState();
-    const [showMenu,setShowMenu] = useState(false);
-    useEffect(()=>{
-        store.dispatch(showCartCount(cartList.length));
-      },[cartList.length,showMenu]);
-
-      function openMenuList() {
-        setShowMenu(prevShowMenu => !prevShowMenu);
-      }
+function Navbar(){
+   
       
 return(
     <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 capitalize ">
         <div className='logo'>
         <Link to='/'>
-          Amazon.co
+         Chya Mart
                 </Link> 
         </div>
-        <ul className={showMenu ? 'showMenu' : ''}>
+        <ul >
         
             <li><FontAwesomeIcon  icon={faMapLocationDot}/>delivery</li>
             <li className={Styles.inputForm}>
                 <input type="text"  placeholder='Search Here!'/>
                 <button><FontAwesomeIcon icon={faSearch} /></button>
             </li>
-            <Link to='/addproduct'>
-            <li><FontAwesomeIcon icon={faAdd}/>Add Products</li>
-            </Link>
             <li><FontAwesomeIcon icon={faUser} />user</li>
-            <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li>
+        <Link to="/return"> <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li></Link> 
             <Link to='/cart'>
             <li>
-                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'>{cartCount}</notify></li>
+                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'></notify></li>
                 
                 </Link>
         </ul>
-        <div onClick={openMenuList} className='menu'>
+        <div  className='menu'>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
