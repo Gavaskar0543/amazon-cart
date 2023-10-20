@@ -9,18 +9,13 @@ import ReturnOrderPage from '../Pages/ReturnOrderPage';
 import SignupPage from './Auth/SignupPage';
 import LoginPage from './Auth/LoginPage';
 import Topnav from './TopNav';
-class App extends React.Component{
-
+function App(){
  
-
-  render(){
- 
-    
   return(
   
   <>
   <Topnav/>
-  <Navbar store={this.props.store}/>
+  <Navbar />
   <Routes>
   <Route path="/" element={<Home />} />
   <Route path='/signup' element={<SignupPage/>} />
@@ -32,8 +27,8 @@ class App extends React.Component{
   <Footer/>
   </>
  
-    );
-}
+  )
+
 }
 
 export default App;

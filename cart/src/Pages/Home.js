@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchApiData } from '../Redux/Reducer/apiSlice';
 import Ad from '../Components/Ad';
 import Styled from 'styled-components';
+import Loading from '../Components/Loading';
+import Products from '../Components/Products'
 function Home(){
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.api);
@@ -41,7 +43,7 @@ function Home(){
 
   if (apiData.status === 'loading') {
   
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
   
 
@@ -62,9 +64,9 @@ function Home(){
         <span>Mens Clothing</span>
 
         <div>
-         {mens.map((data) => (
-          <h1>{data.title}</h1>
-         ))}
+         {mens.map((data) => {
+         return <Products item={data}/>
+})}
         </div>
         </div>
       </section>  
