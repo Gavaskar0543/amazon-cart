@@ -37,7 +37,7 @@ const AddDivContainer = styled.div`
 .animated-element {
    
     transform: translateX(-10%);
-    transition: transform 1s ease-in-out;
+    transition: transform 3s ease-in-out;
   }
   
   .animated-element.animate {

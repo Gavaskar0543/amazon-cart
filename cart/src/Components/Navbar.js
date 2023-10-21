@@ -3,12 +3,18 @@ import { faMapLocationDot,faCartShopping,faGifts,faUser,faAdd,faSearch} from '@f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import  Styles  from '../Styels/Navbar.module.css';
 import { useEffect, useState } from 'react';
 
+
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
-   
+   const [user,setUser] = useState(false);
+  const cart = useSelector((state) => state.cart);
+  const auth = useSelector((state) => state.auth);
+  let cartCount = cart.items.length;
+  
       
 return(
     <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 capitalize ">
@@ -24,13 +30,17 @@ return(
                 <input type="text"  placeholder='Search Here!'/>
                 <button><FontAwesomeIcon icon={faSearch} /></button>
             </li>
-            <li><FontAwesomeIcon icon={faUser} />user</li>
+           
+            {auth.user? ( <li><FontAwesomeIcon icon={faUser} />{auth.user.email}</li>):(
+              <><Link to="/login">Login</Link><span>/</span><Link to="/signup">signup</Link></>
+            )}
         <Link to="/return"> <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li></Link> 
-            <Link to='/cart'>
+          <Link to='/cart'>
             <li>
-                <FontAwesomeIcon icon={faCartShopping} />Cart <notify className='bg-red-500 rounded mb-4'></notify></li>
+                <FontAwesomeIcon icon={faCartShopping} />Cart{cartCount} <notify className='bg-red-500 rounded mb-4'></notify></li>
                 
                 </Link>
+                
         </ul>
         <div  className='menu'>
           <div className='menu-line'></div>

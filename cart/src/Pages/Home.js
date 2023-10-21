@@ -5,11 +5,13 @@ import Ad from '../Components/Ad';
 import Styled from 'styled-components';
 import Loading from '../Components/Loading';
 import Products from '../Components/Products'
+import { addItem,removeItem } from '../Redux/Reducer/cartSlice';
 function Home(){
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.api);
 
-
+const auth = useSelector((state) => state.auth);
+console.log(auth.user)
 
 
 
@@ -51,6 +53,8 @@ function Home(){
     return <div>Error: {apiData.error}</div>;
   }
 
+ 
+  
 
    return(
         <>
@@ -62,49 +66,52 @@ function Home(){
        <section id='mens-clothing' className='section mb75'>
        <div className="section-heading">
         <span>Mens Clothing</span>
-
-        <div>
+        </div>
+        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
          {mens.map((data) => {
          return <Products item={data}/>
 })}
-        </div>
+        
         </div>
       </section>  
 
      
 
-     <Ad/>
-       <section id="female-clothing" className='section mb75'>
+   <Ad/>
+      <section id='womens-clothing' className='section mb75'>
        <div className="section-heading">
         <span>Girls Clothing</span>
-        <div>
-         {womens.map((data) => (
-          <h1>{data.title}</h1>
-         ))}
-         </div>
         </div>
-       
-       </section>
+        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+         {womens.map((data) => {
+         return <Products item={data}/>
+})}
+        
+        </div>
+      </section>  
+<Ad/>
+
        <section id='Electronic' className='section mb75'>
        <div className="section-heading">
         <span>Electronics</span>
-        <div>
-         {electronics.map((data) => (
-          <h1>{data.title}</h1>
-         ))}
-         </div>
+        </div>
+        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+         {electronics.map((data) => {
+          return <Products item={data}/>}
+      )}
+      
         </div>
        </section>
-
+<Ad/>
        <section id="jewellery" className='section mb75'>
        <div className="section-heading">
         <span>jewelery</span>
-
-        <div>
-         {jewelery.map((data) => (
-          <h1>{data.title}</h1>
-         ))}
-         </div>
+        </div>
+        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+         {jewelery.map((data) => {
+          return <Products item={data}/>
+         })}
+        
         </div>
        </section>
        </MainDiv>
@@ -132,7 +139,7 @@ width:100%;
 
 
 
- section{
+.section{
   width:100%;
   display: flex;
   flex-direction: column;
