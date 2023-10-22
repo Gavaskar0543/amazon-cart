@@ -15,7 +15,11 @@ function Navbar(){
   const auth = useSelector((state) => state.auth);
   let cartCount = cart.items.length;
   
-      
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+  const toggleSearchInput = () => {
+    setIsSearchVisible(!isSearchVisible);
+  }; 
 return(
     <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 capitalize ">
         <div className='logo'>
@@ -25,20 +29,23 @@ return(
         </div>
         <ul >
         
-            <li><FontAwesomeIcon  icon={faMapLocationDot}/>delivery</li>
-            <li className={Styles.inputForm}>
-                <input type="text"  placeholder='Search Here!'/>
-                <button><FontAwesomeIcon icon={faSearch} /></button>
+            
+            <li >
+            <div className='search-box'>
+              <input type='text' placeholder='search'/>
+            </div>
+
+
             </li>
            
-            {auth.user? ( <li><FontAwesomeIcon icon={faUser} />{auth.user.email}</li>):(
-              <><Link to="/login">Login</Link><span>/</span><Link to="/signup">signup</Link></>
+            {auth.user? ( <li  className='font-bold'><FontAwesomeIcon icon={faUser} />{auth.user.email}</li>):(
+              <><Link to="/login">Login</Link><span className='px-2 py-2 font-semibold'>|</span><Link to="/signup">signup</Link></>
             )}
-        <Link to="/return"> <li><FontAwesomeIcon icon={faGifts}/> Return Orders</li></Link> 
+        <Link to="/return"> <li className='font-bold'><FontAwesomeIcon icon={faGifts}/> Orders</li></Link> 
           <Link to='/cart'>
-            <li>
-                <FontAwesomeIcon icon={faCartShopping} />Cart{cartCount} <notify className='bg-red-500 rounded mb-4'></notify></li>
-                
+            <li  >
+                <FontAwesomeIcon icon={faCartShopping} /></li>
+                <li><Count>{cartCount}</Count></li>
                 </Link>
                 
         </ul>
@@ -58,7 +65,7 @@ const OuterDiv = Styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
   .logo {
     font-size:36px;
@@ -73,6 +80,7 @@ const OuterDiv = Styled.div`
 
   ul li {
     display: inline-block;
+    padding:0;
     margin: 0 25px;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
@@ -131,6 +139,19 @@ const OuterDiv = Styled.div`
 `;
 
 
+const Count = Styled.div`
+position:relative;
+width:1.5rem;
+height:1.5rem;
+left:-60px;
+top:-10px;
+text-align:center;
+opacity:0.8;
+border-radius:50%;
+background-color:red;
+color:white;
+
+`
 
 
 export default Navbar;

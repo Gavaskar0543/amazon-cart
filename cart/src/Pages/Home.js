@@ -5,7 +5,7 @@ import Ad from '../Components/Ad';
 import Styled from 'styled-components';
 import Loading from '../Components/Loading';
 import Products from '../Components/Products'
-import { addItem,removeItem } from '../Redux/Reducer/cartSlice';
+import Footer from '../Components/Footer';
 function Home(){
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.api);
@@ -115,6 +115,7 @@ console.log(auth.user)
         </div>
        </section>
        </MainDiv>
+       <Footer/>
         </>
     );
 

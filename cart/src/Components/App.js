@@ -9,6 +9,7 @@ import ReturnOrderPage from '../Pages/ReturnOrderPage';
 import SignupPage from './Auth/SignupPage';
 import LoginPage from './Auth/LoginPage';
 import Topnav from './TopNav';
+import ForgotPassword from './Auth/ForgotPassword';
 function App(){
  
   return(
@@ -19,12 +20,13 @@ function App(){
   <Routes>
   <Route path="/" element={<Home />} />
   <Route path='/signup' element={<SignupPage/>} />
+  <Route path='/forgotPassword' element={<ForgotPassword/>} />
   <Route path='/login' element={<LoginPage/>} />
   <Route path="/cart" element={<Cart />}/>
   <Route path="/return" element={<ReturnOrderPage/>} />
   <Route path="/product/:id" element={<ShowProduct />} />
   </Routes>
-  <Footer/>
+
   </>
  
   )
