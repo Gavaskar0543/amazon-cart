@@ -20,8 +20,10 @@ console.log(auth.user)
   let mens = [];
   let womens = [];
  if(apiData.data !== null){
+
+ 
   apiData.data.forEach(element => {
-   
+    
     if(element.category === 'electronics'){
       electronics.push(element);
     }
@@ -54,7 +56,7 @@ console.log(auth.user)
   }
 
  
-  
+  console.log(womens)
 
    return(
         <>

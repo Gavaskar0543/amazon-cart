@@ -1,12 +1,16 @@
 import styled from "styled-components"
 import { useDispatch,useSelector } from "react-redux";
-import { addItem,removeItem } from "../Redux/Reducer/cartSlice";
+import { addItem,removeItem ,increaseQuantity,decreaseQuantity,calculateTotalCartValue} from "../Redux/Reducer/cartSlice";
 import Stars from "./Stars";
+import {  useEffect } from "react";
 export default function Products(props){
 const cart = useSelector((state) => state.cart);
 const dispatch = useDispatch();
+useEffect(()=>{
+  console.log(cart);
+},[cart])
 const {title,image,price,rating} = props.item;
-const isItemInCart = cart.items.some((element) => element.id === props.item.id);
+const isItemInCart = cart.items.some((element) => element.prod.id === props.item.id);
 
 const fillStarts = (rate) => {
    const starsArray = [];
@@ -16,14 +20,38 @@ const fillStarts = (rate) => {
    return starsArray;
 }
 
+
 const handleAddToCart = (item) => {
   
    dispatch(addItem(item));
+   dispatch(calculateTotalCartValue());
+   
    
  };
+ const handleIncreaseQuantity = (item) => {
+ 
+  dispatch(increaseQuantity(item));
+  dispatch(calculateTotalCartValue());
+  
+  
+  
+};
+const handleDecQuantity = (item) => {
+ 
+
+  dispatch(decreaseQuantity(item));
+  dispatch(calculateTotalCartValue());
+  
+  
+  
+};
+
  const handleRemoveFromCart = (itemId) => {
-   
+ 
+
    dispatch(removeItem(itemId));
+   dispatch(calculateTotalCartValue());
+  
   
  };
     return (
@@ -47,6 +75,17 @@ const handleAddToCart = (item) => {
             <span className="font-thin text-gray-600">({rating.count})</span>
          </div>
          <div>
+          {props.cart ? (<div class="flex space-x-4  px-4  ">
+      <button class="px-2 py-1 bg-black text-white font-semibold text-center rounded hover:bg-green-600"  onClick={() => {handleDecQuantity(props.item.id)}}>
+        -
+      </button>
+      <input type="number" class="w-12  font-semibold text-center " value={props.quantity}/>
+      <button class="px-2 py-1 bg-blue-500  font-semibold text-center text-white rounded hover:bg-red-600" onClick={() =>{handleIncreaseQuantity(props.item.id)}}>
+        +
+      </button>
+    </div> ) : ''
+
+          }
         
          {isItemInCart ? (
         <button
