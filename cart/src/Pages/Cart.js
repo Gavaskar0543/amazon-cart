@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Products from "../Components/Products";
 import EmojisContainer from "../Components/EmojisContainer";
+
 function Cart({store}) {
   const [isEmpty,setEmpty] = useState(true);
   const [promoCodeError,setPromoCodeError] = useState(false);
@@ -10,6 +11,7 @@ function Cart({store}) {
   const [cost,setCost] =useState('');
   const [offerApplied,setOfferApplied] = useState(false);
   let cart = useSelector((state) => state.cart);
+ 
 
   useEffect(() => {
     if (cart.items.length > 0) {
@@ -21,6 +23,8 @@ function Cart({store}) {
   }, [cart.items,cart.totalValue]);
  
   
+
+
 const handleApplyPromo = ()=>{
   
 

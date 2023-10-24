@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
-   const [user,setUser] = useState(false);
+  const [user,setUser] = useState(false);
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
   let cartCount = cart.items.length;
@@ -30,16 +30,10 @@ return(
         <ul >
         
             
-            <li >
-            <div className='search-box'>
-              <input type='text' placeholder='search'/>
-            </div>
-
-
-            </li>
+           
            
             {auth.user? ( <li  className='font-bold'><FontAwesomeIcon icon={faUser} />{auth.user.email}</li>):(
-              <><Link to="/login">Login</Link><span className='px-2 py-2 font-semibold'>|</span><Link to="/signup">signup</Link></>
+              <><Link to="/login" className='font-bold'>Login</Link><span className='px-2 py-2 font-semibold'>|</span><Link to="/signup" className='font-bold'>signup</Link></>
             )}
         <Link to="/return"> <li className='font-bold'><FontAwesomeIcon icon={faGifts}/> Orders</li></Link> 
           <Link to='/cart'>
@@ -77,7 +71,9 @@ const OuterDiv = Styled.div`
       color: rgb(254, 189, 105);
     }
   }
-
+ link:hover{
+  color: rgb(254, 189, 105);
+ }
   ul li {
     display: inline-block;
     padding:0;
