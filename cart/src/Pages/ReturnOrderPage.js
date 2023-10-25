@@ -42,8 +42,8 @@ export default function ReturnOrderPage() {
 
   return (
     <>
-    <table>
-    <thead>
+      <table className='w-full border border-3 border-collapse'>
+        <thead>
           <tr>
             <th>Order ID</th>
             <th>Number of Items</th>
@@ -51,20 +51,17 @@ export default function ReturnOrderPage() {
             <th>Total Bill</th>
           </tr>
         </thead>
-      {orders.map((data, index) => (
-        
-        
-        <tbody>
-          <tr>
-            <td>{data.orderid}</td>
-            <td>{data.noOfQuantity}</td>
-            <td>{}</td>
-            <td>{data.Bil}</td>
-          </tr>
+        <tbody className='text-center'>
+          {orders.map((data,index) => (
+            <tr style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : '#e0e0e0' }}>
+              <td>{data.orderid}</td>
+              <td>{data.noOfQuantity}</td>
+              {data.dateOfOrder.seconds}
+              <td>{data.Bil}</td>
+            </tr>
+          ))}
         </tbody>
-       
-      ))}
-       </table>
-    </>
-  );
+      </table>
+    </>);
 }
+  

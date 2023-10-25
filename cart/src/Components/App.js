@@ -3,15 +3,46 @@ import {Route,Routes} from 'react-router-dom';
 import Navbar from "./Navbar";
 import Home from "../Pages/Home";
 import Cart from '../Pages/Cart';
-import Footer from '../Components/Footer';
+import { useEffect } from 'react';
 import ShowProduct from '../Pages/ShowProduct';
 import ReturnOrderPage from '../Pages/ReturnOrderPage';
 import SignupPage from './Auth/SignupPage';
 import LoginPage from './Auth/LoginPage';
 import Topnav from './TopNav';
 import ForgotPassword from './Auth/ForgotPassword';
+import { getAuth,onAuthStateChanged } from 'firebase/auth';
+import { useSelector,useDispatch } from 'react-redux';
+import { login } from '../Redux/Reducer/authSlice';
+
 function App(){
+  let currentUser = useSelector((state) => state.auth);
+  let dispatch = useDispatch();
+  const auth = getAuth();
  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+       
+        const uid = user.uid;
+        dispatch(login(user));
+        // ...
+        console.log("uid", uid);
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  
+    // Return a cleanup function that unsubscribes from the listener
+    return () => unsubscribe();
+  }, []);
+  
+
+
+
   return(
   
   <>
