@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Products from "../Components/Products";
 import EmojisContainer from "../Components/EmojisContainer";
-
-function Cart({store}) {
+import app from '../Config/firebase';
+import { getFirestore,collection, addDoc,doc,deleteDoc, updateDoc, onSnapshot } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+function Cart() {
   const [isEmpty,setEmpty] = useState(true);
   const [promoCodeError,setPromoCodeError] = useState(false);
   const [userPromo,setUserPromo] = useState('');
@@ -21,6 +23,57 @@ function Cart({store}) {
       setEmpty(true);
     }
   }, [cart.items,cart.totalValue]);
+
+let keys = [1,2,3,4,'A','B','C','D','a','b','c','d','#','@','*','$'];
+let keyLength = keys.length;
+function randomIndex(){
+  let index = Math.floor(Math.random()*keyLength);
+ let key = keys[index];
+ return key;
+}
+function getOrderId(){
+  let orderId = "";
+
+for(let i = 0;i<8;i++){
+ orderId +=randomIndex();
+
+}
+
+return orderId;
+}
+
+
+
+
+
+//const user = useSelector((state) => state.auth);
+const auth = getAuth();
+const user = auth.currentUser;
+const userId = user.uid;
+
+
+ async function  checkDb(){
+  const newOrder = {
+    // Your order data here
+    orderid:getOrderId(),
+    noOfQuantity:cart.items.length,
+    dateOfOrder:new Date(),
+    Bil:cost
+    
+  };
+  const db = getFirestore(app);
+  const orderCollectionRef = collection(db, 'users', userId, 'orders');
+
+  try {
+    const docRef = await addDoc(orderCollectionRef, newOrder);
+    console.log('New order added with ID:', docRef.id);
+  } catch (error) {
+    console.error('Error adding order:', error);
+  }
+}
+
+
+  
  
   
 
@@ -98,7 +151,7 @@ const handleApplyPromo = ()=>{
             </div>
 
           <div className="flex justify-center mt-4 mb-3">
-          <button class="px-2 py-1 bg-black  font-semibold text-center text-white rounded hover:bg-red-600">
+          <button onClick={() => {checkDb()}} class="px-2 py-1 bg-black  font-semibold text-center text-white rounded hover:bg-red-600">
         Order Now
       </button>
           </div>

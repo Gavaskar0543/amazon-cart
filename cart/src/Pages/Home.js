@@ -11,7 +11,8 @@ function Home(){
   const apiData = useSelector((state) => state.api);
 
 const auth = useSelector((state) => state.auth);
-console.log(auth.user)
+localStorage.setItem('auth',auth);
+
 
 
 
@@ -56,7 +57,7 @@ console.log(auth.user)
   }
 
  
-  console.log(womens)
+  
 
    return(
         <>
