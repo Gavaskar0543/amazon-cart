@@ -6,6 +6,7 @@ import EmojisContainer from "../Components/EmojisContainer";
 import app from '../Config/firebase';
 import { getFirestore,collection, addDoc,doc,deleteDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { info, success, warning } from "../Config/toastify";
 function Cart() {
   const [isEmpty,setEmpty] = useState(true);
   const [promoCodeError,setPromoCodeError] = useState(false);
@@ -53,12 +54,13 @@ const userId = user.uid;
 
 
  async function  checkDb(){
+  info("ordered successfully! check your orders in orders page!");
   const newOrder = {
     // Your order data here
     orderid:getOrderId(),
     noOfQuantity:cart.items.length,
     dateOfOrder:new Date(),
-    Bil:cost
+    Bill:cost
     
   };
   const db = getFirestore(app);
@@ -82,12 +84,13 @@ const handleApplyPromo = ()=>{
   
 
     if(userPromo === 'NewUser50'){
-
+      success("promo applied successfully!");
       setCost(cost/2);
       setOfferApplied(true);
    
      }
      else{
+          warning("invalid promo code!")
        setPromoCodeError(true);
        setTimeout(()=>{
          setPromoCodeError(false);

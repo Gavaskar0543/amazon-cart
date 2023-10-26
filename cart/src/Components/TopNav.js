@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export default function Topnav(){
     const [color,setColor] = useState('orangered');
-     let arr = ['yellow','orangered','greenyellow','blue'];
+     let arr = ['black','orangered','greenyellow','blue'];
     useEffect(()=>{
         let index = 0;
      setInterval(() => {

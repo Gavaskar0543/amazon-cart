@@ -12,7 +12,7 @@ import Topnav from './TopNav';
 import ForgotPassword from './Auth/ForgotPassword';
 import { getAuth,onAuthStateChanged } from 'firebase/auth';
 import { useSelector,useDispatch } from 'react-redux';
-import { login } from '../Redux/Reducer/authSlice';
+import { login, logout } from '../Redux/Reducer/authSlice';
 
 function App(){
   let currentUser = useSelector((state) => state.auth);
@@ -33,6 +33,7 @@ function App(){
         // User is signed out
         // ...
         console.log("user is logged out");
+        dispatch(logout());
       }
     });
   

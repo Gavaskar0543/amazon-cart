@@ -3,12 +3,11 @@ import { useDispatch,useSelector } from "react-redux";
 import { addItem,removeItem ,increaseQuantity,decreaseQuantity,calculateTotalCartValue} from "../Redux/Reducer/cartSlice";
 import Stars from "./Stars";
 import {  useEffect } from "react";
+import { info } from "../Config/toastify";
 export default function Products(props){
 const cart = useSelector((state) => state.cart);
 const dispatch = useDispatch();
-useEffect(()=>{
-  console.log(cart);
-},[cart])
+
 const {title,image,price,rating} = props.item;
 const isItemInCart = cart.items.some((element) => element.prod.id === props.item.id);
 
@@ -22,7 +21,7 @@ const fillStarts = (rate) => {
 
 
 const handleAddToCart = (item) => {
-  
+  info("Item added to Cart")
    dispatch(addItem(item));
    dispatch(calculateTotalCartValue());
    
@@ -48,7 +47,7 @@ const handleDecQuantity = (item) => {
 
  const handleRemoveFromCart = (itemId) => {
  
-
+   info("Item removed from your cart");
    dispatch(removeItem(itemId));
    dispatch(calculateTotalCartValue());
   
@@ -56,7 +55,7 @@ const handleDecQuantity = (item) => {
  };
     return (
         <>
-        <ProductDiv>
+        <ProductDiv className="setMarinTop">
          <div className="px-3 py-4 element">
             <img src={image} width={70} alt="img"/>
          </div>
@@ -114,6 +113,7 @@ height:19rem;
 display:flex;
 flex-direction:column;
 align-items:center;
+margin-top:5%;
 margin-bottom:3%;
 
 button:hover{
@@ -128,6 +128,12 @@ button:hover{
 .element:hover{
    margin-bottom:10px;
    transform: scale(1.5) rotateY(360deg);
+}
+@media screen and (max-width:480px){
+  .setMarinTop{
+    padding:30px;
+    margin-top:20%;
+  }
 }
 
 `

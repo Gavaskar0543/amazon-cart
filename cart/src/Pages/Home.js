@@ -70,7 +70,7 @@ localStorage.setItem('auth',auth);
        <div className="section-heading">
         <span>Mens Clothing</span>
         </div>
-        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+        <div className='flex flex-wrap justify-around makeGrid  mt-4 mb-4'>
          {mens.map((data) => {
          return <Products item={data}/>
 })}
@@ -85,7 +85,7 @@ localStorage.setItem('auth',auth);
        <div className="section-heading">
         <span>Girls Clothing</span>
         </div>
-        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+        <div className='flex flex-wrap justify-around makeGrid  mt-4 mb-4'>
          {womens.map((data) => {
          return <Products item={data}/>
 })}
@@ -98,7 +98,7 @@ localStorage.setItem('auth',auth);
        <div className="section-heading">
         <span>Electronics</span>
         </div>
-        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+        <div className='flex flex-wrap justify-around makeGrid   mt-4 mb-4'>
          {electronics.map((data) => {
           return <Products item={data}/>}
       )}
@@ -110,7 +110,7 @@ localStorage.setItem('auth',auth);
        <div className="section-heading">
         <span>jewelery</span>
         </div>
-        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+        <div className='flex lg:flex-wrap justify-around makeGrid  mt-4 mb-4'>
          {jewelery.map((data) => {
           return <Products item={data}/>
          })}
@@ -176,6 +176,13 @@ section:nth-child(2n+1){
   margin-bottom:75px;
 }
 
-
+@media screen and (max-width:480px){
+  .makeGrid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:69px;
+  }
+  
+}
 `
 export default  Home;

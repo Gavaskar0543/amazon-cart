@@ -3,13 +3,19 @@ import { faMapLocationDot,faCartShopping,faGifts,faUser,faAdd,faSearch} from '@f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
 import  Styles  from '../Styels/Navbar.module.css';
+import { logout } from '../Redux/Reducer/authSlice';
+
 import { useEffect, useState } from 'react';
+import { getAuth, signOut } from "firebase/auth";
+import { info } from '../Config/toastify';
+
 
 
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
+  const dispatch = useDispatch();
   const [user,setUser] = useState(false);
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
@@ -19,7 +25,20 @@ function Navbar(){
 
   const toggleSearchInput = () => {
     setIsSearchVisible(!isSearchVisible);
-  }; 
+  };
+  
+  const handleLogout = () =>{
+    const auth = getAuth();
+signOut(auth).then(() => {
+  dispatch(logout());
+ info("signout successfully");
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+  console.log(error.message);
+});
+   
+  }
 return(
     <OuterDiv  style={{backgroundColor:"rgb(19,25,33)",color:"whitesmoke"}}  className="sticky top-0 capitalize ">
         <div className='logo'>
@@ -32,7 +51,11 @@ return(
             
            
            
-            {auth.user? ( <li  className='font-bold'><FontAwesomeIcon icon={faUser} />{auth.user.email}</li>):(
+            {auth.user? (<><li  className='font-bold'><FontAwesomeIcon icon={faUser} className='px-2' /><span className='lowercase semibold px-2'>{auth.user.email}</span></li> <li onClick={handleLogout} className='semibold px-3'>
+
+              logout
+
+            </li></> ):(
               <><Link to="/login" className='font-bold'>Login</Link><span className='px-2 py-2 font-semibold'>|</span><Link to="/signup" className='font-bold'>signup</Link></>
             )}
         <Link to="/return"> <li className='font-bold'><FontAwesomeIcon icon={faGifts}/> Orders</li></Link> 

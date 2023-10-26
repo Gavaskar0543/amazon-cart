@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { info, warning } from '../../Config/toastify';
 
 
 function SignupPage() {
@@ -12,11 +13,15 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
+      if(password !== confirmPassword){
+            warning("password/confirmpassword mismatch");
+            return;
+      }
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log('User registered:', user);
-      navigate('/login')
+      info('User registered');
+      navigate('/')
       // You can add additional logic here, such as sending a confirmation email or redirecting the user.
     } catch (error) {
       console.error('Error registering user:', error);
@@ -51,6 +56,20 @@ function SignupPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+      />
+    </div>
+    <div className="mb-6">
+      <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
+        Confirm Password
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="password"
+        type="password"
+          placeholder="Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
       />
     </div>
     <div className="flex items-center justify-between">

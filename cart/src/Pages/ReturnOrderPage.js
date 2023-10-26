@@ -6,6 +6,14 @@ import { useEffect, useState } from 'react';
 export default function ReturnOrderPage() {
   const [orders, setOrders] = useState([]);
 
+const convertToDate = (seconds) =>{
+ let timestamp = seconds; 
+  const date = new Date(timestamp * 1000);
+ // Format the date as a string, for example, in a human-readable format
+ const formattedDate = date.toDateString(); // You can use other formatting methods as needed
+
+ return formattedDate;
+}
   useEffect(() => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -27,6 +35,7 @@ export default function ReturnOrderPage() {
         querySnapshot.forEach((doc) => {
           // Retrieve data from each document
           const orderData = doc.data();
+          console.log(orderData)
           retrievedOrders.push(orderData);
         });
         // Update the component state with the retrieved orders
@@ -56,8 +65,8 @@ export default function ReturnOrderPage() {
             <tr style={{ backgroundColor: index % 2 === 0 ? '#f5f5f5' : '#e0e0e0' }}>
               <td>{data.orderid}</td>
               <td>{data.noOfQuantity}</td>
-              {data.dateOfOrder.seconds}
-              <td>{data.Bil}</td>
+              <td>{convertToDate(data.dateOfOrder.seconds)}</td>
+              <td>{data.Bill}</td>
             </tr>
           ))}
         </tbody>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
 import { login } from "../../Redux/Reducer/authSlice";
 import { useSelector,useDispatch } from "react-redux";
+import { success,error as Error } from "../../Config/toastify";
 
 export default function LoginPage(){
   const dispatch = useDispatch();
@@ -24,15 +25,15 @@ const handleSignin = (e) => {
         // Signed in 
         const user = userCredential.user;
         dispatch(login(user));
-       
-         console.log('login success');
+         success("login successful");
          navigate('/');
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
+        Error(error.message);
         const errorMessage = error.message;
-        console.log(errorMessage)
+       
       });
     }
     return(
