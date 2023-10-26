@@ -105,7 +105,7 @@ const handleApplyPromo = ()=>{
 
   return (
     <>
-    <MasterDiv className="flex flex-wrap makeColum ">
+    <MasterDiv className=" flex">
     <MainDiv>
       {isEmpty ?<> <h1 className="setCenter font-semibold text-center text-2xl p-4">Your cart is empty &#x1F6D2;</h1> <EmojisContainer/></>: 
          
@@ -114,20 +114,22 @@ const handleApplyPromo = ()=>{
        <div className="section-heading">
         <span className="font-bold text-sm">Review Your Cart</span>
         </div>
-        <div className='flex flex-wrap justify-around  mt-4 mb-4'>
+        <div className=' flex flex-wrap makeColumn  mt-4 mb-4'>
          {cart.items.map((data) => {
           return <Products item={data.prod} quantity={data.quantity} cart={true}/>
          })}
         
         </div>
+        
         </section>
+    
 
         }
     </MainDiv>
 
     {!isEmpty ?  
    ( <CartValue>
-    <section id="jewellery" className='section mb75'>
+    <section  className='section mb75'>
        <div className="section-heading">
         <span className="font-bold text-sm">Bill</span>
         </div>
@@ -177,9 +179,11 @@ const handleApplyPromo = ()=>{
 const MasterDiv = styled.div`
 
 @media screen and (max-width:480px){
-  .makeColum{
-    display:flex;
-    flex-direction:column;
+  width:97vw;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+    
    
   }
 }
@@ -188,7 +192,7 @@ const MasterDiv = styled.div`
 const CartValue = styled.div`
 width:40vw;
 height:84vh;
-overflow:scroll;
+
 
 .left-minus-50 {
 position:relative;
@@ -198,7 +202,9 @@ font-size:12px;
 
 @media screen and (max-width:480px){
  width:95vw;
- height:auto;
+
+ height:50vh;
+
 }
 
 }
@@ -265,7 +271,13 @@ overflow:scroll;
 .mb75{
   margin-bottom:75px;
 }
-
+ @media screen and (max-width:480px){
+  #jewellery{
+    width:100vw;
+    height:50vh;
+    overflow:scroll;
+  }
+ }
 
 `
 export default Cart;

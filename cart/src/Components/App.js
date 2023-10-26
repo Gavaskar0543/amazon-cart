@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Route,Routes} from 'react-router-dom';
+import {Route,Routes ,Navigate} from 'react-router-dom';
 import Navbar from "./Navbar";
 import Home from "../Pages/Home";
 import Cart from '../Pages/Cart';
@@ -15,25 +15,31 @@ import { useSelector,useDispatch } from 'react-redux';
 import { login, logout } from '../Redux/Reducer/authSlice';
 
 function App(){
+  const [isAuthenticated,setisAuthenticated] =useState(false);
   let currentUser = useSelector((state) => state.auth);
   let dispatch = useDispatch();
   const auth = getAuth();
  
   useEffect(() => {
+   
+     
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
        
         const uid = user.uid;
+        setisAuthenticated(true);
         dispatch(login(user));
         // ...
         console.log("uid", uid);
       } else {
         // User is signed out
         // ...
-        console.log("user is logged out");
+       
         dispatch(logout());
+        setisAuthenticated(false);
       }
     });
   
@@ -42,7 +48,21 @@ function App(){
   }, []);
   
 
+  const ProtectedCartRoute = () => {
+    if (isAuthenticated) {
+      return <Cart />;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  };
 
+  const ProtectedOrderRoute = () => {
+    if (isAuthenticated) {
+      return <ReturnOrderPage />;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  };
 
   return(
   
@@ -54,8 +74,8 @@ function App(){
   <Route path='/signup' element={<SignupPage/>} />
   <Route path='/forgotPassword' element={<ForgotPassword/>} />
   <Route path='/login' element={<LoginPage/>} />
-  <Route path="/cart" element={<Cart />}/>
-  <Route path="/return" element={<ReturnOrderPage/>} />
+  <Route path="/cart" element={<ProtectedCartRoute />}/>
+  <Route path="/return" element={< ProtectedOrderRoute/>} />
   <Route path="/product/:id" element={<ShowProduct />} />
   </Routes>
 
