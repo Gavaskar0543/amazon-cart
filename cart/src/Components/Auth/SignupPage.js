@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { info, warning } from '../../Config/toastify';
-
+import { useEffect } from 'react';
 
 function SignupPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
-
+  useEffect(()=>{
+    document.title = 'ChyaMart|signup';
+  },[])
   const handleSignup = async (e) => {
     e.preventDefault();
     try {

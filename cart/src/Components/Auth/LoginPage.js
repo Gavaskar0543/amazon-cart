@@ -1,5 +1,5 @@
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
 import { login } from "../../Redux/Reducer/authSlice";
 import { useSelector,useDispatch } from "react-redux";
@@ -14,7 +14,9 @@ export default function LoginPage(){
 
   
 
-
+useEffect(()=>{
+  document.title = 'ChyaMart|login';
+},[])
 
 
 const handleSignin = (e) => {

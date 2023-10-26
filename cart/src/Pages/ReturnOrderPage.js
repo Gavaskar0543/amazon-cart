@@ -15,6 +15,7 @@ const convertToDate = (seconds) =>{
  return formattedDate;
 }
   useEffect(() => {
+    document.title = 'ChyaMart|orders';
     const auth = getAuth();
     const user = auth.currentUser;
     const userId = user.uid;

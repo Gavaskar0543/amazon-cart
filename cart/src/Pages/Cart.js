@@ -15,8 +15,12 @@ function Cart() {
   const [offerApplied,setOfferApplied] = useState(false);
   let cart = useSelector((state) => state.cart);
  
-
+  
+    
+   
+  
   useEffect(() => {
+    document.title = 'ChyaMart|cart';
     if (cart.items.length > 0) {
       setEmpty(false);
       setCost(cart.totalValue);
@@ -101,7 +105,7 @@ const handleApplyPromo = ()=>{
 
   return (
     <>
-    <div className="flex ">
+    <MasterDiv className="flex flex-wrap makeColum ">
     <MainDiv>
       {isEmpty ?<> <h1 className="setCenter font-semibold text-center text-2xl p-4">Your cart is empty &#x1F6D2;</h1> <EmojisContainer/></>: 
          
@@ -165,10 +169,21 @@ const handleApplyPromo = ()=>{
         </section>
     </CartValue>) : ''
  }
-    </div>
+    </MasterDiv>
     </>
   );
 }
+
+const MasterDiv = styled.div`
+
+@media screen and (max-width:480px){
+  .makeColum{
+    display:flex;
+    flex-direction:column;
+   
+  }
+}
+`
 
 const CartValue = styled.div`
 width:40vw;
@@ -180,6 +195,11 @@ position:relative;
 top:20px;
 left:-20px;
 font-size:12px;
+
+@media screen and (max-width:480px){
+ width:95vw;
+ height:auto;
+}
 
 }
 

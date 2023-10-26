@@ -16,17 +16,17 @@ import { info } from '../Config/toastify';
 library.add(faMapLocationDot,faCartShopping);
 function Navbar(){
   const dispatch = useDispatch();
-  const [user,setUser] = useState(false);
+  const [showMenu,setShowMenu] = useState(false);
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
   let cartCount = cart.items.length;
   
   const [isSearchVisible, setIsSearchVisible] = useState(false);
 
-  const toggleSearchInput = () => {
-    setIsSearchVisible(!isSearchVisible);
-  };
-  
+ 
+  function openMenuList() {
+    setShowMenu(prevShowMenu => !prevShowMenu);
+  }
   const handleLogout = () =>{
     const auth = getAuth();
 signOut(auth).then(() => {
@@ -46,7 +46,7 @@ return(
          Chya Mart
                 </Link> 
         </div>
-        <ul >
+        <ul className={showMenu ? 'showMenu' : ''} >
         
             
            
@@ -62,11 +62,11 @@ return(
           <Link to='/cart'>
             <li  >
                 <FontAwesomeIcon icon={faCartShopping} /></li>
-                <li><Count>{cartCount}</Count></li>
+                <li><Count id="count">{cartCount}</Count></li>
                 </Link>
                 
         </ul>
-        <div  className='menu'>
+        <div  onClick={openMenuList} className='menu'>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
@@ -169,6 +169,11 @@ opacity:0.8;
 border-radius:50%;
 background-color:red;
 color:white;
+
+  @media screen and (max-width:480px){
+   left:65px;
+   top:-35px;
+  }
 
 `
 

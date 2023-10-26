@@ -43,6 +43,7 @@ localStorage.setItem('auth',auth);
 
  
   useEffect(() => {
+    document.title = 'ChyaMart|Home';
     dispatch(fetchApiData());
   }, [dispatch]);
 

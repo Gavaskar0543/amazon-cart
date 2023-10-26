@@ -19,7 +19,7 @@ export default function Topnav(){
         <div style={{widht:"100vw",background:`${color}`,transition:"background 2s ease-in-out",fontWeight:"700",color:"wheat"}}>
 
             <marquee direction="right"
-             behavior="alternate" className=" text-xl text-black-700">Every order gets 25% discount</marquee>
+             behavior="alternate" className=" text-xl text-black-700">Every order gets 25% discount &#127881;</marquee>
 
         </div>
         </>
